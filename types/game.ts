@@ -5,6 +5,8 @@ export interface GameState {
   currentGuess: string;
   guesses: string[];
   wordToGuess: string;
+  hasWon: boolean;
+  hasLost: boolean;
 }
 
 export interface LetterBoxProps {

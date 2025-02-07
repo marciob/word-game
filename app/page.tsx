@@ -6,6 +6,7 @@ import { Subtitle } from "@/components/ui/Subtitle";
 import { useGameState } from "@/hooks/useGameState";
 import { useEffect } from "react";
 import { Victory } from "@/components/game/Victory";
+import { GameOver } from "@/components/game/GameOver";
 
 export default function Home() {
   const { gameState, startGame, updateGuess, submitGuess, deleteLastLetter } =
@@ -157,6 +158,7 @@ export default function Home() {
       </div>
 
       {gameState.hasWon && <Victory />}
+      {gameState.hasLost && <GameOver />}
     </main>
   );
 }

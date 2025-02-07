@@ -9,6 +9,7 @@ const INITIAL_STATE: GameState = {
   guesses: ["", "", "", "", "", ""], // 6 empty guesses
   wordToGuess: "WORLD",
   hasWon: false,
+  hasLost: false,
 };
 
 export const useGameState = () => {
@@ -36,6 +37,7 @@ export const useGameState = () => {
     newGuesses[gameState.attempts] = gameState.currentGuess;
 
     const isCorrect = gameState.currentGuess === gameState.wordToGuess;
+    const isLastAttempt = gameState.attempts + 1 >= gameState.maxAttempts;
 
     setGameState((prev) => ({
       ...prev,
@@ -43,6 +45,7 @@ export const useGameState = () => {
       attempts: prev.attempts + 1,
       currentGuess: "",
       hasWon: isCorrect,
+      hasLost: !isCorrect && isLastAttempt,
     }));
   };
 
