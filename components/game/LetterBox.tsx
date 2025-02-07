@@ -1,16 +1,33 @@
 import { LetterBoxProps } from "@/types/game";
 
-export const LetterBox = ({ letter, isRevealed }: LetterBoxProps) => (
+const stateStyles = {
+  empty: "bg-[#FBD000] border-[#B52C1C] shadow-[inset_-3px_-3px_0px_#B52C1C]",
+  absent:
+    "bg-[#808080] border-[#4A4A4A] text-white shadow-[inset_-3px_-3px_0px_#4A4A4A]",
+  present:
+    "bg-[#FFA500] border-[#CC8400] text-white shadow-[inset_-3px_-3px_0px_#CC8400]",
+  correct:
+    "bg-[#6AAA64] border-[#538D4E] text-white shadow-[inset_-3px_-3px_0px_#538D4E]",
+};
+
+export const LetterBox = ({ letter, state }: LetterBoxProps) => (
   <div
-    className="w-14 h-14 relative border-b-[6px] border-[#E45C3A] mx-1.5 
-    flex items-center justify-center text-2xl font-bold 
-    bg-[#FBD000] text-[#B52C1C] rounded-xl 
-    shadow-[4px_4px_0px_#B52C1C]
-    transition-all duration-300 
-    hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#B52C1C]
-    active:translate-y-[2px] active:shadow-[2px_2px_0px_#B52C1C]"
+    className={`w-16 h-16 relative border-4 mx-1 
+    flex items-center justify-center text-3xl font-black 
+    rounded-xl transition-all duration-300
+    transform hover:scale-105
+    ${stateStyles[state]}
+    before:absolute before:top-1 before:left-1
+    before:w-4 before:h-4 before:bg-white/30 before:rounded-full
+    `}
   >
-    {isRevealed ? letter : ""}
-    <div className="absolute -top-1 -left-1 w-3 h-3 bg-[#FEE55B] rounded-full shadow-inner" />
+    <span
+      className={`
+      ${letter ? "animate-pop-in" : ""}
+      ${state !== "empty" ? "animate-flip" : ""}
+    `}
+    >
+      {letter}
+    </span>
   </div>
 );
