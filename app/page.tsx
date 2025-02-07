@@ -7,10 +7,17 @@ import { useGameState } from "@/hooks/useGameState";
 import { useEffect } from "react";
 import { Victory } from "@/components/game/Victory";
 import { GameOver } from "@/components/game/GameOver";
+import { HowToPlay } from "@/components/ui/HowToPlay";
 
 export default function Home() {
-  const { gameState, startGame, updateGuess, submitGuess, deleteLastLetter } =
-    useGameState();
+  const {
+    gameState,
+    startGame,
+    updateGuess,
+    submitGuess,
+    deleteLastLetter,
+    resetGame,
+  } = useGameState();
 
   // Handle keyboard events
   useEffect(() => {
@@ -32,6 +39,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#5C94FC] overflow-hidden relative px-4">
+      <HowToPlay isPlaying={gameState.isPlaying} />
       {/* Decorative clouds */}
       <div className="absolute top-[10%] left-[10%] w-20 h-12 bg-white rounded-full opacity-80" />
       <div className="absolute top-[15%] right-[15%] w-24 h-14 bg-white rounded-full opacity-80" />
@@ -44,15 +52,15 @@ export default function Home() {
 
       <div className="h-screen flex flex-col relative z-10">
         {/* Header */}
-        <div className="pt-8 pb-4 relative">
+        <div className="pt-8 pb-4 relative z-10">
           <GameTitle />
           <Subtitle />
         </div>
 
         {/* Game Content */}
-        <div className="flex-1 flex flex-col items-center">
+        <div className="flex-1 flex flex-col items-center relative z-10">
           {!gameState.isPlaying ? (
-            <div className="flex-1 flex items-center justify-center -mt-20">
+            <div className="flex-1 flex items-center justify-center -mt-20 relative z-10">
               <div
                 className="text-center p-8 
                 bg-[#FBD000] rounded-2xl w-full max-w-sm
@@ -158,7 +166,7 @@ export default function Home() {
       </div>
 
       {gameState.hasWon && <Victory />}
-      {gameState.hasLost && <GameOver />}
+      {gameState.hasLost && <GameOver onReset={resetGame} />}
     </main>
   );
 }

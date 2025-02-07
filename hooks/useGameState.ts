@@ -15,6 +15,10 @@ const INITIAL_STATE: GameState = {
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(INITIAL_STATE);
 
+  const resetGame = () => {
+    setGameState(INITIAL_STATE);
+  };
+
   const startGame = () => {
     setGameState((prev) => ({
       ...prev,
@@ -62,5 +66,6 @@ export const useGameState = () => {
     updateGuess,
     submitGuess,
     deleteLastLetter,
+    resetGame,
   };
 };

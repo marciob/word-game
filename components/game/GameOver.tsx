@@ -1,4 +1,8 @@
-export const GameOver = () => {
+interface GameOverProps {
+  onReset: () => void;
+}
+
+export const GameOver = ({ onReset }: GameOverProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Dark overlay with fade in */}
@@ -50,7 +54,7 @@ export const GameOver = () => {
           </span>
         </p>
         <button
-          onClick={() => window.location.reload()}
+          onClick={onReset}
           className="mt-4 w-full py-4 px-6 
             bg-[#FBD000] rounded-xl font-black text-[#B52C1C] text-xl
             shadow-[0px_6px_0px_#7A1805]

@@ -25,6 +25,7 @@ export const LetterBox = ({ letter, state }: LetterBoxProps) => (
       className={`
       ${letter ? "animate-pop-in" : ""}
       ${state !== "empty" ? "animate-flip" : ""}
+      text-white [text-shadow:1px_1px_0px_#B52C1C]
     `}
     >
       {letter}
